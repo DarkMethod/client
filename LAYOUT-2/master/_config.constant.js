@@ -57,7 +57,7 @@ app.constant('JS_REQUIRES', {
         'knobCtrl': 'assets/js/controllers/knobCtrl.js',
 		
 		//*** Factory & Services
-		//'authModal': 'assets/js/services/authModal.js',
+		'modal': 'assets/js/services/modal.js',
 		
     },
     //*** angularJS Modules

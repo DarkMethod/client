@@ -476,23 +476,20 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 	.state('login', {
 	    url: '/login',
 	    template: '<div ui-view class="fade-in-right-big smooth"></div>',
+		resolve: loadSequence('authCtrl', 'modal'),
 	    abstract: true
 	}).state('login.login', {
 	    url: '/login/:status',
 	    templateUrl: "assets/views/login_login.html",
-		resolve: loadSequence('authCtrl')
 	}).state('login.forgot', {
 	    url: '/forgot/:status',
 	    templateUrl: "assets/views/login_forgot.html",
-		resolve: loadSequence('authCtrl')
 	}).state('login.reset', {
 	    url: '/reset/:token',
 	    templateUrl: "assets/views/login_reset.html",
-		resolve: loadSequence('authCtrl')
 	}).state('login.registration', {
 	    url: '/registration/:status',
 	    templateUrl: "assets/views/login_registration.html",
-		resolve: loadSequence('authCtrl')
 	}).state('login.lockscreen', {
 	    url: '/lock',
 	    templateUrl: "assets/views/login_lock_screen.html"
@@ -514,7 +511,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 	.state('services', {
 	    url: '/services',
 	    templateUrl: 'assets/views/services.html',
-		resolve: loadSequence('authCtrl', 'servicesCtrl'),
+		resolve: loadSequence('authCtrl', 'servicesCtrl','modal'),
 		abstract:true
 	}).state('services.home', {
 	    url: '/home',
