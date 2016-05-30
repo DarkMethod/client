@@ -39,10 +39,10 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 		abstract: true
     }).state('app.dashboard', {
         url: "/dashboard",
-        // templateUrl: "assets/views/dashboard.html",
-        templateUrl: "assets/views/table_data.html",
-        //resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
-        resolve: loadSequence('ngTable', 'ngTableCtrl'),
+        //templateUrl: "assets/views/dashboard.html",
+        templateUrl: "assets/views/tasks.html",
+        // resolve: loadSequence('d3', 'ui.knob', 'countTo', 'dashboardCtrl'),
+        resolve: loadSequence('ngTable', 'task', 'taskCtrl'),
 		title: 'Dashboard',
         ncyBreadcrumb: {
             label: 'Dashboard'
@@ -477,16 +477,29 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 	    url: '/login',
 	    template: '<div ui-view class="fade-in-right-big smooth"></div>',
 		resolve: loadSequence('authCtrl', 'modal'),
+		onEnter:['$state', '$auth',function($state, $auth){
+				if($auth.isAuthenticated()){
+					$state.go('services.home');
+				}}],
 	    abstract: true
 	}).state('login.login', {
 	    url: '/login/:status',
 	    templateUrl: "assets/views/login_login.html",
+	}).state('login._login', {
+	    url: '/admin/:status',
+	    templateUrl: "assets/views/login_admin.html",
 	}).state('login.forgot', {
 	    url: '/forgot/:status',
 	    templateUrl: "assets/views/login_forgot.html",
+	}).state('login._forgot', {
+	    url: '/admin/forgot/:status',
+	    templateUrl: "assets/views/login_admin_forgot.html",
 	}).state('login.reset', {
 	    url: '/reset/:token',
 	    templateUrl: "assets/views/login_reset.html",
+	}).state('login._reset', {
+	    url: '/admin/reset/:token',
+	    templateUrl: "assets/views/login_admin_reset.html",
 	}).state('login.registration', {
 	    url: '/registration/:status',
 	    templateUrl: "assets/views/login_registration.html",
@@ -501,7 +514,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 	    url: '/landing-page',
 	    template: '<div ui-view class="fade-in-right-big smooth"></div>',
 	    abstract: true,
-	    resolve: loadSequence('jquery-appear-plugin', 'ngAppear', 'countTo')
+	    resolve: loadSequence('jquery-appear-plugin', 'ngAppear', 'countTo', 'modal', 'servicesCtrl')
 	}).state('landing.welcome', {
 	    url: '/welcome',
 	    templateUrl: "assets/views/landing_page.html"

@@ -55,9 +55,11 @@ app.constant('JS_REQUIRES', {
         'notifyCtrl': 'assets/js/controllers/notifyCtrl.js',
         'sliderCtrl': 'assets/js/controllers/sliderCtrl.js',
         'knobCtrl': 'assets/js/controllers/knobCtrl.js',
+        'taskCtrl': 'assets/js/controllers/taskCtrl.js',
 		
 		//*** Factory & Services
 		'modal': 'assets/js/services/modal.js',
+		'task': 'assets/js/services/task.js'
 		
     },
     //*** angularJS Modules
@@ -124,5 +126,8 @@ app.constant('JS_REQUIRES', {
     }, {
         name: 'satellizer',
         files: ['../bower_components/satellizer/satellizer.min.js']
+    },{
+        name: 'ui.select',
+        files: ['../bower_components/angular-ui-select/dist/select.min.js']
     }]
 });
